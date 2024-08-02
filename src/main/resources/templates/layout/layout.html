@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:fragment="page_head">
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('aplicacion.nombre')}">My Website</title>
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <!-- Bootstrap css -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- Bootstrap js -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js">
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5" th:fragment="page_navbar">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{home.do}">TaskManager</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       th:href="@{tasksMostrar.do}">Administrar tareas</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle d-flex align-items-center"
+                   href="#" id="userDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="me-2" th:text="${session.currentUser.username}"></span>
+                    <img src="https://avatars.githubusercontent.com/u/76443525?v=4"
+                         alt="User Avatar" class="avatar shadow-4">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item py-3 pe-5" href="#">
+                            <i class="fa-solid fa-user me-3"></i>Mi perfil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item py-3 pe-5" href="#">
+                            <i class="fa-solid fa-gear me-3"></i>Configuración
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item py-3 pe-5" th:href="@{logoutAction.do}">
+                            <i class="fa-solid fa-right-from-bracket me-3"></i>Cerrar
+                            Sesión
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<footer th:fragment="page_footer" class="container">
+    <p>&copy; 2024 My Application</p>
+</footer>
+</body>
+</html>
