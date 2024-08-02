@@ -1,0 +1,22 @@
+body, html {
+    height: 100%;
+}
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.enlace {
+    font-weight: 400;
+    list-style: none;
+    text-decoration: none;
+}
