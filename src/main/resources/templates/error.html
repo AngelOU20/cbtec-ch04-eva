@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${@environment.getProperty('aplicacion.nombre')}"></title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <style>
+        .title-error {
+            font-weight: 700;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-1 title-error">Error</h1>
+            <p class="lead">Ocurrió un problema, gracias por su comprensión</p>
+            <p class="lead">Lo sentimos, algo salió mal.</p>
+            <a href="/" class="btn btn-primary">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+</body>
+</html>
