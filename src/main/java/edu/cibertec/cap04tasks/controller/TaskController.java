@@ -82,8 +82,10 @@ public class TaskController {
     @RequestMapping(value = "taskUpdate", method = RequestMethod.POST)
     public String taskUpdateAccion(@Valid @ModelAttribute("taskBean") Task task,
                                    BindingResult result,
-                                   @ModelAttribute("currentUser") User currentUser,
+                                   @SessionAttribute("currentUser") User currentUser,
                                    Model model) {
+
+        System.out.println("currentUser: " + currentUser.getId());
 
         if (result.hasErrors()) {
             List<Task> tasks = taskService.getAllTasksByUser(currentUser);
@@ -91,8 +93,32 @@ public class TaskController {
             return "taskEdit";
         }
 
-        task.setUser(currentUser);  // Asociar la tarea con el usuario actual
-        taskService.updateTask(task);
+        // Verificar que currentUser tiene un id válido
+        if (currentUser == null || currentUser.getId() == 0) {
+            model.addAttribute("errorMessage", "Current user is not valid");
+            return "taskEdit";
+        }
+
+        // Agregar logs para depuración
+        System.out.println("currentUser: " + currentUser.getId());
+
+        // Cargar la tarea existente desde la base de datos
+        Task existingTask = taskService.getTaskById(task.getId());
+        if (existingTask != null) {
+            System.out.println("existingTask found: " + existingTask.getId());
+
+            existingTask.setTitle(task.getTitle());
+            existingTask.setDescription(task.getDescription());
+            existingTask.setStatus(task.getStatus());
+            existingTask.setUser(currentUser);  // Asociar la tarea con el usuario actual
+
+            taskService.updateTask(existingTask);
+        } else {
+            // Manejar el caso donde la tarea no existe (opcional)
+            model.addAttribute("errorMessage", "Task not found");
+            return "taskEdit";
+        }
+
         return "redirect:/tasksList";
     }
 }
