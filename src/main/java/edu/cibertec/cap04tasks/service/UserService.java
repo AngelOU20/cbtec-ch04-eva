@@ -1,8 +1,8 @@
 package edu.cibertec.cap04tasks.service;
 
-import edu.cibertec.cap04tasks.dao.entity.UserEntity;
+import edu.cibertec.cap04tasks.dao.entity.User;
 
 public interface UserService {
-    UserEntity validateLogin(UserEntity user);
-    UserEntity saveUser(UserEntity user);
+    User validateLogin(User user);
+    User saveUser(User user);
 }

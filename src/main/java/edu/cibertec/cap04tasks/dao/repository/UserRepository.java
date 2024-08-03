@@ -1,8 +1,8 @@
 package edu.cibertec.cap04tasks.dao.repository;
 
-import edu.cibertec.cap04tasks.dao.entity.UserEntity;
+import edu.cibertec.cap04tasks.dao.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    UserEntity findByUsernameAndPassword(String username, String password);
+public interface UserRepository extends JpaRepository<User, Integer> {
+    User findByUsernameAndPassword(String username, String password);
 }

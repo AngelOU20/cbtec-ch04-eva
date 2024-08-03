@@ -1,6 +1,6 @@
 package edu.cibertec.cap04tasks.service.impl;
 
-import edu.cibertec.cap04tasks.dao.entity.UserEntity;
+import edu.cibertec.cap04tasks.dao.entity.User;
 import edu.cibertec.cap04tasks.dao.repository.UserRepository;
 import edu.cibertec.cap04tasks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserEntity validateLogin(UserEntity user) {
-        UserEntity validateUser =
+    public User validateLogin(User user) {
+        User validateUser =
                 userRepository.findByUsernameAndPassword(
                         user.getUsername(),
                         user.getPassword()
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity saveUser(UserEntity user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 }
