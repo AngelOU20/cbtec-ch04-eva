@@ -9,15 +9,13 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user")
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @NotNull
     private int id;
 
-    @NotNull
     @NotBlank(message = "El usuario es obligatorio")
     @Size(min = 5, max = 50,message = "El usuario no es valido")
     private String username;
@@ -27,10 +25,10 @@ public class UserEntity {
     @Email(message = "El email no es valido", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
-    @NotNull
     @NotBlank(message = "La contraseña es obligatorio")
+    @Size(min = 2, max = 15, message = "La contraseña no es valida")
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TaskEntity> tasks;
+    private List<Task> tasks;
 }
