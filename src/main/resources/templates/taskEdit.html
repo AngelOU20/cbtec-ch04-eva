@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/tasks.css}">
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+  <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+  <title th:text="${@environment.getProperty('aplicacion.nombre')}"></title>
+</head>
+<body>
+<nav th:replace="~{layout/layout :: page_navbar}"></nav>
+
+<section class="container">
+  <h1 class="text-center mb-4">Editar Tarea</h1>
+
+  <form th:action="@{/taskUpdate}" th:object="${taskBean}" method="post" id="editTaskForm" class="register-form">
+    <input type="hidden" th:field="*{id}" />
+    <div class="mb-3">
+      <label for="taskTitle" class="form-label">Título</label>
+      <input type="text" th:field="*{title}" class="form-control" id="taskTitle" required/>
+      <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger mt-2"></div>
+    </div>
+    <div class="mb-3">
+      <label for="taskDescription" class="form-label">Descripción</label>
+      <textarea th:field="*{description}" class="form-control" id="taskDescription" rows="3" required></textarea>
+      <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger text-uppercase mt-2"></div>
+    </div>
+    <div class="mb-3">
+      <label for="taskStatus" class="form-label">Estado</label>
+      <select th:field="*{status}" class="form-select" id="taskStatus" required>
+        <option value="Pendiente">Pendiente</option>
+        <option value="En progreso">En progreso</option>
+        <option value="Completada">Completada</option>
+      </select>
+      <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="text-danger text-uppercase mt-2"></div>
+    </div>
+    <button type="submit" class="btn btn-primary">
+      <i class="fas fa-save"></i> Actualizar
+    </button>
+
+  </form>
+</section>
+
+<footer th:replace="~{layout/layout :: page_footer}"></footer>
+</body>
+</html>
